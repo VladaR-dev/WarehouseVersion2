@@ -1,0 +1,27 @@
+@use '../../constants/colors' as *;
+
+.headerContainer {
+  height: 100px;
+  width: 100%;
+  padding-left: 50px;
+  display: flex;
+  border-bottom: 1px solid $LIGHT_GRAY;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+
+    h1 {
+      color: $BLACK;
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+      height: 100%;
+      font-size: 30px;
+
+      span {
+        color: $BLUE;
+      }
+    }
+  }
+}

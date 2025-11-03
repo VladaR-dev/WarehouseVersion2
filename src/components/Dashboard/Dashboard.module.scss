@@ -1,0 +1,43 @@
+@use '../../constants/colors' as *;
+
+.dashboardContainer {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  height: 100%;
+  padding-top: 70px;
+  justify-content: start;
+  align-items: center;
+
+  a {
+    color: $GRAY_MEDIUM;
+    text-decoration: none;
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding-left: 20px;
+      gap: 10px;
+      font-size: 18px;
+      height: 70px;
+      width: 200px;
+      color: $GRAY_MEDIUM;
+
+      &:hover {
+        color: $BLUE_PRIMARY;
+        background-color: $WHITE_LIGHT;
+        border-radius: 10px;
+      }
+    }
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+
+    &:hover {
+      color: $BLUE_PRIMARY;
+    }
+  }
+}
