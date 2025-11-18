@@ -20,14 +20,17 @@
     "plugin:react/recommended"
   ],
   "rules": {
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": ["warn", {}, { "usePrettierrc": true }],
     "react-hooks/rules-of-hooks": "off",
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+
 
     // Добавьте эти правила для преобразования ошибок в предупреждения
     "@typescript-eslint/no-unused-vars": "warn",

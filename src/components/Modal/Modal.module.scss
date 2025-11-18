@@ -1,0 +1,69 @@
+.modalWrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  right: 0;
+  top: 0;
+
+  .modalPosition {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 540px;
+    height: 350px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+
+    .modalContent {
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+
+      .content {
+        width: 100%;
+      }
+
+      .close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+      }
+
+      .buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+
+        .btn {
+          display: block;
+          text-transform: lowercase;
+          font-size: 16px;
+          width: 100%;
+          height: 50px;
+
+          &::first-letter {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+
+
+  }
+}
