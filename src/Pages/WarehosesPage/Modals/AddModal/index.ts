@@ -1,2 +1,2 @@
-export * from './AddModal';
+export * from './AddModalWarehouse';
 export * from './useAddWarehouse';

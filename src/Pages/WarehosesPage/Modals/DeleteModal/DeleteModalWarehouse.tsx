@@ -10,7 +10,7 @@ interface Props {
   onSubmit: (name: string) => void;
 }
 
-export const DeleteModal = ({
+export const DeleteModalWarehouse = ({
   warehouseName,
   isOpen,
   handleClose,

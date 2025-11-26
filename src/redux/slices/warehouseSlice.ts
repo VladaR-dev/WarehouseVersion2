@@ -9,7 +9,7 @@ export interface WarehouseType {
 
 export interface WarehousesState {
   items: WarehouseType[];
-  filteredItems: WarehouseType[];
+  searchTerm: string;
   selectedWarehouseId: string | null;
 }
 
@@ -21,10 +21,10 @@ const initialState: WarehousesState = {
     { name: 'Крупа', id: '3', products: [] },
     { name: 'Сыры', id: '4', products: [] },
   ],
-  filteredItems: [],
+  searchTerm: '',
   selectedWarehouseId: null,
 };
-
+//filtereItems вычисляется в компоненте
 const warehousesSlice = createSlice({
   name: 'warehouses',
   initialState: initialState,
@@ -34,21 +34,14 @@ const warehousesSlice = createSlice({
     },
     editWarehouse: (state, action: PayloadAction<{ id: string; name: string }>) => {
       const { id, name } = action.payload;
-      state.items.map((item) => {
-        if (item.id === id) {
-          item.name = name;
-        }
-        return item;
-      });
+      state.items = state.items.map((item) => (item.id === id ? { ...item, name } : item));
     },
     removeWarehouse: (state, action: PayloadAction<string>) => {
       const id = action.payload;
       state.items = state.items.filter((item) => item.id !== id);
     },
     filteredWarehouses: (state, action: PayloadAction<string>) => {
-      state.filteredItems = state.items.filter(({ name }) =>
-        name.toLowerCase().includes(action.payload.toLowerCase()),
-      );
+      state.searchTerm = action.payload;
     },
   },
 });

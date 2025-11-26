@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, TextField, Button } from '@mui/material';
 import { RootState } from 'app/redux/store';
 import s from './WarehousesPage.module.scss';
 import {
-  EditModal,
+  EditModalWarehouse,
   useEditWarehouse,
-  DeleteModal,
+  DeleteModalWarehouse,
   useDeleteWarehouse,
-  AddModal,
+  AddModalWarehouse,
   useAddWarehouse,
 } from './Modals';
 import { filteredWarehouses } from 'app/redux/slices/warehouseSlice';
 
 export const WarehousesPage = () => {
   const dispatch = useDispatch();
-  const warehouses = useSelector((state: RootState) => state.warehouse);
+  const warehouses = useSelector((state: RootState) => state.warehouse.items);
+  const searchTerm = useSelector((state: RootState) => state.warehouse.searchTerm);
+
+  console.log('searchTerm', searchTerm);
+  console.log('warehouses', warehouses);
 
   const { modalTypeEdit, openModalEdit, handleCloseEditModal, handleEdit, warehouseNameEdit } =
     useEditWarehouse();
@@ -29,9 +33,12 @@ export const WarehousesPage = () => {
   } = useDeleteWarehouse();
   const { openModalAdd, handleAdd, handleCloseAddModal, modalTypeAdd } = useAddWarehouse();
 
-  const [search, setSearch] = useState<string>('');
-
-  const visibleItems = !search ? warehouses.items : warehouses.filteredItems;
+  const visibleItems = useMemo(() => {
+    if (!searchTerm) return warehouses;
+    return warehouses.filter((warehouse) =>
+      warehouse.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  }, [warehouses, searchTerm]);
 
   return (
     <>
@@ -47,9 +54,8 @@ export const WarehousesPage = () => {
               variant="outlined"
               type="search"
               label="Поиск"
-              value={search}
+              value={searchTerm}
               onChange={(e) => {
-                setSearch(e.target.value);
                 dispatch(filteredWarehouses(e.target.value));
               }}
             />
@@ -89,7 +95,7 @@ export const WarehousesPage = () => {
       </div>
 
       {modalTypeEdit === 'edit' && (
-        <EditModal
+        <EditModalWarehouse
           warehouseName={warehouseNameEdit}
           onSubmit={handleEdit}
           handleClose={handleCloseEditModal}
@@ -97,14 +103,14 @@ export const WarehousesPage = () => {
         />
       )}
       {modalTypeAdd === 'add' && (
-        <AddModal
+        <AddModalWarehouse
           onSubmit={handleAdd}
           handleClose={handleCloseAddModal}
           isOpen={modalTypeAdd === 'add'}
         />
       )}
       {modalTypeDelete === 'delete' && (
-        <DeleteModal
+        <DeleteModalWarehouse
           warehouseId={warehouseId}
           warehouseName={warehouseNameDelete}
           onSubmit={handleDelete}

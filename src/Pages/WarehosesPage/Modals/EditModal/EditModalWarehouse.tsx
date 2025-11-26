@@ -1,37 +1,38 @@
 import { Modal } from 'app/components';
 import React, { useState } from 'react';
 import { TextField } from '@mui/material';
-import s from './AddModal.module.scss';
+import s from './EditModal.module.scss';
 
 interface Props {
   isOpen: boolean;
   handleClose: () => void;
   onSubmit: (name: string) => void;
+  warehouseName: string;
 }
 
-export const AddModal = ({ isOpen, handleClose, onSubmit }: Props) => {
-  const [newWarehouse, setNewWarehouse] = useState('');
+export const EditModalWarehouse = ({ isOpen, handleClose, onSubmit, warehouseName }: Props) => {
+  const [newWarehouseName, setWarehouseName] = useState(warehouseName);
 
   const handleSubmit = () => {
-    onSubmit(newWarehouse);
+    onSubmit(newWarehouseName);
   };
 
   return (
     <Modal
-      submitButtonText="Добавить"
       onSubmit={handleSubmit}
-      title="Добавить склад"
+      title="Редактирование склада"
       isOpen={isOpen}
       handleClose={handleClose}
     >
-      <div className={s.contentAddModal}>
-        <TextField className={s.inp}
+      <div className={s.input}>
+        <TextField
+          className={s.nameWarehouseInp}
           id="outlined-basic"
           label="Название склада"
           variant="outlined"
           sx={{ width: '400px', borderRadius: '12px' }}
-          value={newWarehouse}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewWarehouse(e.target.value)}
+          value={newWarehouseName}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWarehouseName(e.target.value)}
         />
       </div>
     </Modal>

@@ -1,2 +1,2 @@
-export * from './EditModal';
+export * from './EditModalWarehouse';
 export * from './useEditWarehouse';
