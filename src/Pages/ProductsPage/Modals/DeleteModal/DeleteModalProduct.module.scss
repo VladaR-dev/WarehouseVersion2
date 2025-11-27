@@ -1,0 +1,42 @@
+@use '../../../../constants/colors' as *;
+
+.formControl {
+  width: 100%;
+
+  .someQuantityProducts {
+    padding-top: 10px;
+    color: $GRAY_MEDIUM;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .questionQuantity {
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    }
+
+    .numberQuantity {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+      font-size: 20px;
+
+      input {
+        display: flex;
+        text-align: center;
+        outline: none;
+        width: 50px;
+        padding: 2px;
+        font-size: 20px;
+        color: $GRAY_MEDIUM;
+        border: none;
+        border-bottom: 1px solid $GRAY_MEDIUM;
+      }
+    }
+  }
+
+}
+

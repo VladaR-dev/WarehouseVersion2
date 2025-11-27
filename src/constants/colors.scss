@@ -1,0 +1,38 @@
+$colors: (
+  WHITE: #fff,
+  LIGHT_GRAY: #f8f8f8,
+  BLACK: #000,
+  BLUE: #568cf1,
+  GRAY_MEDIUM: #a4a4a4,
+  BLUE_PRIMARY: #5c8bef,
+  WHITE_LIGHT: #f9faff,
+  GRAY_DARK: #666,
+  GRAY_MIDDLE: #333,
+  GRAY_NEUTRAL: #ccc,
+  WHITE_SMOKE: #f5f5f5,
+  BLUE_BASE: #1976d2,
+  BLUE_DARK: #1565c0,
+);
+
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}
+
+$WHITE: color(WHITE);
+$LIGHT_GRAY: color(LIGHT_GRAY);
+$BLACK: color(BLACK);
+$BLUE: color(BLUE);
+$GRAY_MEDIUM: color(GRAY_MEDIUM);
+$BLUE_PRIMARY: color(BLUE_PRIMARY);
+$WHITE_LIGHT: color(WHITE_LIGHT);
+$GRAY_DARK: color(GRAY_DARK);
+$GRAY_MIDDLE: color(GRAY_MIDDLE);
+$GRAY_NEUTRAL: color(GRAY_NEUTRAL);
+$WHITE_SMOKE: color(WHITE_SMOKE);
+$BLUE_BASE: color(BLUE_BASE);
+$BLUE_DARK: color(BLUE_DARK);

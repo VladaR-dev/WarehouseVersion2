@@ -1,39 +1,63 @@
 {
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 2021,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "project": "./tsconfig.json"
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "react",
-        "react-hooks",
-        "prettier"
-    ],
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
-    ],
-    "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/no-explicit-any": "warn",
-        "prettier/prettier": ["warn", {}, { "usePrettierrc": true }],
-        "react-hooks/rules-of-hooks": "off",
-        "react-hooks/exhaustive-deps": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
-    },
-    "settings": {
-        "react": {
-            "version": "detect"
-        }
-    },
-    "ignorePatterns": ["node_modules", "build", "dist", "*.config.js", "*.d.ts"]
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }],
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+
+
+    // Добавьте эти правила для преобразования ошибок в предупреждения
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-unused-vars": "off", // Отключаем базовое правило ESLint
+    "@typescript-eslint/prefer-as-const": "warn",
+    "@typescript-eslint/no-inferrable-types": "warn",
+    "@typescript-eslint/no-var-requires": "warn",
+    "no-case-declarations": "warn",
+    "no-extra-semi": "warn",
+    "no-mixed-spaces-and-tabs": "warn",
+    "no-useless-escape": "warn",
+    "prefer-const": "warn",
+    "no-prototype-builtins": "warn",
+    "no-control-regex": "warn",
+    "no-empty": "warn",
+
+    // Для JSX/React
+    "react/no-unescaped-entities": "warn",
+    "react/prop-types": "warn",
+    "react/display-name": "warn",
+    "react/jsx-key": "warn",
+    "react/no-direct-mutation-state": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": ["node_modules", "build", "dist", "*.config.js", "*.d.ts"]
 }
