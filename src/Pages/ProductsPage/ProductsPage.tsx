@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typography, TextField, Button } from '@mui/material';
 import { RootState } from 'app/redux/store';
 import { AddModalProduct, useAddProduct, useDeleteProduct, DeleteModalProduct } from 'app/Pages';
-import { filteredProducts } from 'app/redux/slices/productsSlices';
+import { setSearchProduct } from 'app/redux/slices/productsSlices';
 import s from './ProductsPage.module.scss';
 
 export const ProductsPage = () => {
@@ -43,7 +43,7 @@ export const ProductsPage = () => {
               label="Поиск"
               value={searchTerm}
               onChange={(e) => {
-                dispatch(filteredProducts(e.target.value));
+                dispatch(setSearchProduct(e.target.value));
               }}
             />
             <Button variant="contained" onClick={() => openAddModal()} className={s.btn}>

@@ -116,11 +116,11 @@ export const productSlice = createSlice({
         });
       }
     },
-    filteredProducts: (state, action: PayloadAction<string>) => {
+    setSearchProduct: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
   },
 });
 
-export const { addProduct, deleteProduct, filteredProducts } = productSlice.actions;
+export const { addProduct, deleteProduct, setSearchProduct } = productSlice.actions;
 export default productSlice.reducer;
