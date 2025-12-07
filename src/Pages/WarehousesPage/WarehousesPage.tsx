@@ -12,6 +12,7 @@ import {
   useAddWarehouse,
 } from './Modals';
 import { filteredWarehouses } from 'app/redux/slices/warehouseSlice';
+import { Link } from 'react-router-dom';
 
 export const WarehousesPage = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,8 @@ export const WarehousesPage = () => {
         <div className={s.itemsList}>
           {visibleItems.map((item) => (
             <div key={item.id} className={s.item}>
-              {item.name}
+              <Link to={`/${item.id}`}>{item.name}</Link>
+
               <div className={s.itemButton}>
                 <Button
                   className={s.btn}

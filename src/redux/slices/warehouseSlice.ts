@@ -43,9 +43,36 @@ const warehousesSlice = createSlice({
     filteredWarehouses: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
+    addProductsToWarehouse: (
+      state,
+      action: PayloadAction<{
+        warehouseId: string;
+        products: Product[];
+      }>,
+    ) => {
+      const { warehouseId, products } = action.payload;
+      const warehouse = state.items.find((warehouse) => warehouse.id === warehouseId);
+
+      if (warehouse) {
+        products.map((newProduct) => {
+          const existingProduct = warehouse.products.find(
+            (product) => product.id === newProduct.id,
+          );
+          if (existingProduct) {
+            existingProduct.quantity += newProduct.quantity;
+          }
+          warehouse.products.push({ ...newProduct });
+        });
+      }
+    },
   },
 });
 
-export const { addWarehouse, editWarehouse, removeWarehouse, filteredWarehouses } =
-  warehousesSlice.actions;
+export const {
+  addWarehouse,
+  editWarehouse,
+  removeWarehouse,
+  filteredWarehouses,
+  addProductsToWarehouse,
+} = warehousesSlice.actions;
 export default warehousesSlice.reducer;

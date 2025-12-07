@@ -1,2 +1,3 @@
 export * from './ProductsPage';
-export * from './WarehosesPage';
+export * from './WarehousesPage';
+export * from './WarehousePage';
