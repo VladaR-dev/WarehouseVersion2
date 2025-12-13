@@ -69,7 +69,7 @@ export const WarehousesPage = () => {
         <div className={s.itemsList}>
           {visibleItems.map((item) => (
             <div key={item.id} className={s.item}>
-              <Link to={`/${item.id}`}>{item.name}</Link>
+              <Link to={`/warehouses/${item.id}`}>{item.name}</Link>
 
               <div className={s.itemButton}>
                 <Button

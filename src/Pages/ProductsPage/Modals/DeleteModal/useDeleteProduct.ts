@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'app/redux/store';
-import { deleteProduct } from 'app/redux/slices/productsSlices';
+import { deleteProduct, removeProductCompletely } from 'app/redux/slices/productsSlices';
 import { toast } from 'react-toastify';
 
 export const useDeleteProduct = () => {
@@ -34,13 +34,19 @@ export const useDeleteProduct = () => {
       return;
     }
 
-    if (quantity < 0 || quantity === 0) {
+    if (quantity < 0) {
       toast.error('Количество должно быть больше 0');
       return;
     }
 
     if (quantity > product.quantity) {
-      toast.error('Нельзя удалить больше чем есть в наличии');
+      toast.error('Нельзя удалить больше товара, чем есть в наличии');
+      return;
+    }
+
+    if (quantity === 0 || quantity === product.quantity) {
+      dispatch(removeProductCompletely(selectedProductId));
+      handleCloseDeleteModal();
       return;
     }
 

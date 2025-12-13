@@ -25,7 +25,7 @@ export const useAddProduct = () => {
 
     if (name.trim() && !hasDuplicate) {
       if (quantity <= 0) {
-        toast.error('Количество товвара должно быть больше 0');
+        toast.error('Количество товара должно быть больше 0');
         return;
       }
       dispatch(

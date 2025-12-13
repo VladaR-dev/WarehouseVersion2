@@ -34,6 +34,14 @@ export const DeleteModalProduct = ({
     onSubmit(quantity);
   };
 
+  const handleQuantityChange = (value: number) => {
+    if(!selectProduct) return;
+
+    if(value<0) {
+
+    }
+  }
+
   return (
     <Modal
       submitButtonText="Удалить"

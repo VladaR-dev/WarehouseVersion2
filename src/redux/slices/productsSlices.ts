@@ -71,7 +71,7 @@ const initialState: ProductState = {
     {
       name: 'Овсяные хлопья',
       id: 'prod_gr_003',
-      quantity: 38,
+      quantity: 3,
     },
     {
       name: 'Сыр Российский',
@@ -81,12 +81,12 @@ const initialState: ProductState = {
     {
       name: 'Сыр Моцарелла',
       id: 'prod_ch_002',
-      quantity: 18,
+      quantity: 2,
     },
     {
       name: 'Сыр Гауда',
       id: 'prod_ch_003',
-      quantity: 22,
+      quantity: 4,
     },
   ],
   searchTerm: '',
@@ -102,19 +102,18 @@ export const productSlice = createSlice({
     deleteProduct: (state, action: PayloadAction<{ id: string; quantity: number }>) => {
       const { id, quantity } = action.payload;
 
-      if (!quantity) {
-        state.items = state.items.filter((item) => item.id !== id);
-        return;
-      }
+      const product = state.items.find((product) => product.id === id);
 
-      if (quantity > 0) {
-        state.items = state.items.map((item) => {
-          if (item.id === id) {
-            item.quantity -= quantity;
-          }
-          return item;
-        });
+      if (!product) return;
+
+      product.quantity -= quantity;
+
+      if (product.quantity <= 0) {
+        state.items = state.items.filter((item) => item.id !== id);
       }
+    },
+    removeProductCompletely: (state, action: PayloadAction<string>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
     },
     setSearchProduct: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
@@ -122,5 +121,5 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addProduct, deleteProduct, setSearchProduct } = productSlice.actions;
+export const { addProduct, deleteProduct, setSearchProduct, removeProductCompletely } = productSlice.actions;
 export default productSlice.reducer;

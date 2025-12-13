@@ -10,7 +10,7 @@ export interface WarehouseType {
 export interface WarehousesState {
   items: WarehouseType[];
   searchTerm: string;
-  selectedWarehouseId: string | null;
+  selectedWarehouseId: string | null;//нигде не изменяется
 }
 
 const initialState: WarehousesState = {
@@ -43,7 +43,7 @@ const warehousesSlice = createSlice({
     filteredWarehouses: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
-    addProductsToWarehouse: (
+    updateWarehouseProducts: (
       state,
       action: PayloadAction<{
         warehouseId: string;
@@ -60,11 +60,38 @@ const warehousesSlice = createSlice({
           );
           if (existingProduct) {
             existingProduct.quantity += newProduct.quantity;
+            return;
           }
           warehouse.products.push({ ...newProduct });
         });
       }
     },
+    removeProductsFromWarehouse: (state, action: PayloadAction<{
+      warehouseId: string;
+      products: Product[];
+    }>) => {
+      const { warehouseId, products } = action.payload;
+      const warehouse = state.items.find((warehouse) => warehouse.id === warehouseId);
+
+      if (!warehouse) return;
+
+      products.map(({ id, quantity }) => {
+        const product = warehouse.products.find((product) => product.id === id);
+
+        if (!product) return;
+
+        if (quantity === undefined || quantity >= product.quantity) {
+          warehouse.products = warehouse.products.filter((product) => product.id !== id);
+          return;
+        }
+
+        product.quantity -= quantity;
+        return product;
+      });
+    },
+    setSelectedWarehouseId:(state, action: PayloadAction<string | null>) => {
+      state.selectedWarehouseId= action.payload;
+    }
   },
 });
 
@@ -73,6 +100,7 @@ export const {
   editWarehouse,
   removeWarehouse,
   filteredWarehouses,
-  addProductsToWarehouse,
+  updateWarehouseProducts,
+  setSelectedWarehouseId
 } = warehousesSlice.actions;
 export default warehousesSlice.reducer;

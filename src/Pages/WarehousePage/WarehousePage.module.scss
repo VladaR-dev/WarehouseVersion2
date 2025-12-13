@@ -1,3 +1,5 @@
+@use '../../constants/colors' as *;
+
 .warehouseContainer {
   display: flex;
   gap: 40px;
@@ -23,11 +25,46 @@
       gap: 20px;
 
       button {
-        border-radius: 7px;
+        border-radius: 10px;
         text-transform: none;
+        height: 54px;
 
         &::first-letter {
           text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+
+    .itemBlock {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      background-color: $WHITE ;
+      padding: 0 25px;
+      border-radius: 10px;
+
+      -webkit-box-shadow: 4px 4px 12px 0px rgba(34, 60, 80, 0.06);
+      -moz-box-shadow: 4px 4px 12px 0px rgba(34, 60, 80, 0.06);
+      box-shadow: 4px 4px 12px 0px rgba(34, 60, 80, 0.06);
+
+      .QuantityButton {
+        display: flex;
+        align-items: center;
+        gap: 70px;
+
+        button {
+          text-transform: none;
+
         }
       }
     }
