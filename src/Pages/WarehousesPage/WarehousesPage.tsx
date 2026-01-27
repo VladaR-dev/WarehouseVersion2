@@ -19,9 +19,6 @@ export const WarehousesPage = () => {
   const warehouses = useSelector((state: RootState) => state.warehouse.items);
   const searchTerm = useSelector((state: RootState) => state.warehouse.searchTerm);
 
-  console.log('searchTerm', searchTerm);
-  console.log('warehouses', warehouses);
-
   const { modalTypeEdit, openModalEdit, handleCloseEditModal, handleEdit, warehouseNameEdit } =
     useEditWarehouse();
   const {

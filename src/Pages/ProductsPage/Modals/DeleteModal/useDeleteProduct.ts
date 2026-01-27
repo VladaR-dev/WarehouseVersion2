@@ -23,8 +23,6 @@ export const useDeleteProduct = () => {
   };
 
   const handleDelete = (quantity: number) => {
-    console.log('selectedProductId', selectedProductId);
-    console.log('quantity', quantity);
     if (!selectedProductId) return;
 
     const product = products.find((product) => product.id === selectedProductId);

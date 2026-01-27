@@ -92,6 +92,23 @@ const initialState: ProductState = {
   searchTerm: '',
 };
 
+const deleteProductLogic = (
+  state: ProductState,
+  id: string,
+  quantity: number,
+) => {
+
+  const product = state.items.find((product) => product.id === id);
+
+  if (!product) return;
+
+  product.quantity -= quantity;
+
+  if (product.quantity <= 0) {
+    state.items = state.items.filter((item) => item.id !== id);
+  }
+};
+
 export const productSlice = createSlice({
   name: 'products',
   initialState,
@@ -99,18 +116,16 @@ export const productSlice = createSlice({
     addProduct: (state, action: PayloadAction<Product>) => {
       state.items.push(action.payload);
     },
+    //для одиночного продукта(объект)
     deleteProduct: (state, action: PayloadAction<{ id: string; quantity: number }>) => {
       const { id, quantity } = action.payload;
-
-      const product = state.items.find((product) => product.id === id);
-
-      if (!product) return;
-
-      product.quantity -= quantity;
-
-      if (product.quantity <= 0) {
-        state.items = state.items.filter((item) => item.id !== id);
-      }
+      deleteProductLogic(state, id, quantity);
+    },
+    //для удаления массива объектов
+    deleteProductsBatch: (state, action: PayloadAction<{ productId: string; quantity: number }[]>) => {
+      action.payload.forEach(({ productId, quantity }) => {
+        deleteProductLogic(state, productId, quantity);
+      });
     },
     removeProductCompletely: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
@@ -121,5 +136,5 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addProduct, deleteProduct, setSearchProduct, removeProductCompletely } = productSlice.actions;
+export const { addProduct, deleteProduct,deleteProductsBatch, setSearchProduct, removeProductCompletely } = productSlice.actions;
 export default productSlice.reducer;

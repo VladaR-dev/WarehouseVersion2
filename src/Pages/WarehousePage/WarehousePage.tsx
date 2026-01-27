@@ -30,11 +30,6 @@ export const WarehousePage = () => {
 
   const currentWarehouse = warehouses.find((warehouse) => warehouse.id === current);
 
-  console.log('===>current', current);
-  console.log('===>currentWarehouse', currentWarehouse);
-  console.log('===>warehouses', warehouses);
-
-
   const { modalTypeAdd, handleCloseAddModal, openAddModal, handleAdd } = useAddWarehouseProducts();
 
   if (!currentWarehouse) {

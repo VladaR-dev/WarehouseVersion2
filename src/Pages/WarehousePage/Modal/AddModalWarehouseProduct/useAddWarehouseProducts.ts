@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'app/redux/store';
-import { toast } from 'react-toastify';
 import { updateWarehouseProducts } from 'app/redux/slices/warehouseSlice';
-import { deleteProduct, Product } from 'app/redux/slices/productsSlices';
+import { deleteProductsBatch, Product } from 'app/redux/slices/productsSlices';
 
 
 export const useAddWarehouseProducts = () => {
@@ -51,8 +50,7 @@ export const useAddWarehouseProducts = () => {
       products: fullProductsInfo,
     }));
 
-
-    filteredProducts.map(({ productId, quantity }) => dispatch(deleteProduct({ id: productId, quantity })));
+    dispatch(deleteProductsBatch(filteredProducts));
 
     handleCloseAddModal();
   };
