@@ -25,7 +25,8 @@ export const AddModalWarehouse = ({ isOpen, handleClose, onSubmit }: Props) => {
       handleClose={handleClose}
     >
       <div className={s.contentAddModal}>
-        <TextField className={s.inp}
+        <TextField
+          className={s.inp}
           id="outlined-basic"
           label="Название склада"
           variant="outlined"

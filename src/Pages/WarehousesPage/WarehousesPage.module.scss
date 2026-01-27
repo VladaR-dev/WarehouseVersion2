@@ -60,6 +60,12 @@
       height: 70px;
       background: $WHITE;
 
+      a{
+        text-decoration: none;
+        color: $BLACK;
+        width: 100%;
+      }
+
       .itemButton {
         display: flex;
         gap: 10px;

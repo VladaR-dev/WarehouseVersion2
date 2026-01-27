@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { ProductsPage, WarehousesPage } from 'app/Pages';
+import { ProductsPage, WarehousePage, WarehousesPage } from 'app/Pages';
 import { Dashboard, Header } from 'app/components';
 
 import './App.scss';
@@ -16,6 +16,7 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<WarehousesPage />} />
             <Route path="/warehouses" element={<WarehousesPage />} />
+            <Route path="/warehouses/:id" element={<WarehousePage />} />
             <Route path="/products" element={<ProductsPage />} />
           </Routes>
         </div>
@@ -24,3 +25,5 @@ export const App = () => {
     </div>
   );
 };
+
+//Сделать страница не найдена
