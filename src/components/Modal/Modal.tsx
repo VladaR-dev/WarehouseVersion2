@@ -1,6 +1,6 @@
 import React, { ReactNode, useRef } from 'react';
-import s from './Modal.module.scss';
 import { Button, Typography } from '@mui/material';
+import s from './Modal.module.scss';
 
 interface Props {
   isOpen: boolean;

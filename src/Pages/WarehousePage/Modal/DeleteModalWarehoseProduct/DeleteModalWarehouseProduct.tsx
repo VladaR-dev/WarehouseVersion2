@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+
 import { Product } from 'app/redux/slices/productsSlices';
 import { Modal } from 'app/components';
+
 import s from './DeleteModalWarehouseProduct.module.scss';
 
 interface Props {
@@ -18,11 +21,18 @@ export const DeleteModalWarehouseProduct = ({ isOpen, handleClose, onSubmit, pro
 
   const selectProduct = products.find((product) => product.id === productId);
 
-  if(!selectProduct) return;
-
 const handleSubmit = () => {
   if(quantityType === 'all') {
     onSubmit(selectProduct!.quantity);
+    return;
+  }
+  if (quantity <= 0 || isNaN(quantity)) {
+    toast.error('Введите корректное количество больше 0');
+    return;
+  }
+
+  if (quantity > selectProduct!.quantity) {
+    toast.error('Нельзя удалить больше, чем есть в наличии');
     return;
   }
   onSubmit(quantity);
@@ -32,7 +42,7 @@ const handleSubmit = () => {
     <Modal
       submitButtonText="Удалить"
       onSubmit={handleSubmit}
-      title={`Удалить ${selectProduct.name}`}
+      title={`Удалить ${selectProduct?.name}`}
       isOpen={isOpen}
       handleClose={handleClose}
     >
@@ -62,6 +72,7 @@ const handleSubmit = () => {
               <div className={s.questionQuantity}>Какое количество вы хотите удалить?</div>
               <div className={s.numberQuantity}>
                 <input
+                  className={s.inputQuantity}
                   type="number"
                   value={quantity}
                   onChange={(e)=>setQuantity(e.target.valueAsNumber)}

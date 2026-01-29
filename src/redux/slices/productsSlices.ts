@@ -109,6 +109,22 @@ const deleteProductLogic = (
   }
 };
 
+const increaseProductQuantityLogic = (
+  state: ProductState,
+  name: string,
+  id: string,
+  quantity: number,
+) => {
+  const product = state.items.find((product) => product.id === id);
+
+  if (product) {
+    product.quantity += quantity;
+    return;
+  }
+  state.items.push({ name, id, quantity });
+
+};
+
 export const productSlice = createSlice({
   name: 'products',
   initialState,
@@ -133,8 +149,19 @@ export const productSlice = createSlice({
     setSearchProduct: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
+    increaseProductQuantity: (state, action: PayloadAction<{ name: string, id: string; quantity: number }>) => {
+      const {name, id, quantity} = action.payload;
+      increaseProductQuantityLogic(state, name, id, quantity);
+    },
   },
 });
 
-export const { addProduct, deleteProduct,deleteProductsBatch, setSearchProduct, removeProductCompletely } = productSlice.actions;
+export const {
+  addProduct,
+  deleteProduct,
+  deleteProductsBatch,
+  setSearchProduct,
+  removeProductCompletely,
+  increaseProductQuantity,
+} = productSlice.actions;
 export default productSlice.reducer;
