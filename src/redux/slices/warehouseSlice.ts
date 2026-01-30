@@ -101,6 +101,7 @@ export const {
   removeWarehouse,
   filteredWarehouses,
   updateWarehouseProducts,
+  removeProductsFromWarehouse,
   setSelectedWarehouseId
 } = warehousesSlice.actions;
 export default warehousesSlice.reducer;
